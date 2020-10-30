@@ -4,7 +4,7 @@ Automated ELK Stack Deployment
 The files in this repository were used to configure the network depicted below: 
 
 https://app.diagrams.net/
-
+(japkaur17/ELK-Stack-project/images/"ELK NW.png")
  
 
 [NOTE: the network diagram has differing IP addresses from the ones Azure assigned me by default]
