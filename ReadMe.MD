@@ -139,7 +139,7 @@ _As a **Bonus**, provide the specific commands the user will need to run to down
 ![Kibanalogs](https://github.com/japkaur17/ELK-Stack-project/blob/main/images/logs.PNG)
 
 
-Congratulations! You have an ELK Stack Server monitoring system logs on two web serve
+Congratulations! You have an ELK Stack Server monitoring system logs on two web servers
 
  
 
