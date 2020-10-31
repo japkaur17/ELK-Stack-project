@@ -136,6 +136,8 @@ _As a **Bonus**, provide the specific commands the user will need to run to down
 - 8. ansible-playbook beats-playbook.yml (Installs and Vonfigure Beats)
 - 9. Open a new browser on personal workstation, navigate to (ELK-Server-Public:5601/app/kibana) - This will bring up Kibana Web Portal 
 ![Kibana](https://github.com/japkaur17/ELK-Stack-project/blob/main/images/kibana.PNG) 
+![Kibanalogs](https://github.com/japkaur17/ELK-Stack-project/blob/main/images/logs.PNG)
+
 
 Congratulations! You have an ELK Stack Server monitoring system logs on two web serve
 
