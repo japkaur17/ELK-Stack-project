@@ -30,9 +30,9 @@ The main advantage of using a jump box is having one origination point for admin
 - What aspect of security do load balancers protect? What is the advantage of a jump box?_
 
 Integrating an ELK server allows users to easily monitor the vulnerable VMs for changes to the logs and system traffic.
-- _TODO: What does Filebeat watch for?_
+- What does Filebeat watch for?
 - Filebeat monitors the log files or locations specified, collects log events, and forwards them for indexing
-- _TODO: What does Metricbeat record?_
+- What does Metricbeat record?
 - Metricbeat records system and application metrics. It allows for viewing cpu, memory, disk and network metrics, in addition to also allowing monitoring for apache, docker, and applications installed. It also records statisctical data from the operating system and from services running on the server (Metricbeat: Lightweight Shipper for Metrics)
 
 The configuration details of each machine may be found below.
