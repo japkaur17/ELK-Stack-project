@@ -6,148 +6,139 @@ The files in this repository were used to configure the network depicted below:
 ![alt text](https://github.com/japkaur17/ELK-Stack-project/blob/main/images/ELK%20NW.PNG) 
 
 [NOTE: the network diagram has differing IP addresses from the ones Azure assigned me by default]
-These files have been tested and used to generate a live ELK deployment on Azure. They can be used to either recreate the entire deployment pictured above. Alternatively, select portions of the yml file(s) may be used to install only certain pieces of it, such as Filebeat.
-This document contains the following details: Description of the Topology, Access Policies, ELK Configuration, Beats in Use, Machines Being Monitored, and How to Use the Ansible Build
+These files have been tested and used to generate a live ELK deployment on Azure. They can be used to either recreate the entire deployment pictured above. Alternatively, select portions of the playbook (.yml) file(s) may be used to install only certain pieces of it, such as Filebeat.
+
+  - _TODO: Enter the playbook file._
+
+This document contains the following details:
+- Description of the Topology
+- Access Policies
+- ELK Configuration
+  - Beats in Use
+  - Machines Being Monitored
+- How to Use the Ansible Build
 
 
-•	Description of the Topology
-The main purpose of this network is to expose a load-balanced and monitored instance of DVWA (web servers) – the D*mn Vulnerable Web Application.
+### Description of the Topology
 
-o	Load balancing ensures that the application will be highly available, in addition to restricting inbound access to the network. The load balancer ensures that resources required to process incoming traffic will be shared by both vulnerable web servers. Access controls will ensure that only authorized users will be able to connect.
-o	Integrating an ELK server allows users to easily monitor the vulnerable VMs for changes to the file and system.
-o	-Filebeat monitors the log files or locations specified, collects log events, and forwards them for indexing
-o	-Metricbeat records system and application metrics. It allows for viewing cpu,memory,disk, and network metrics, in addition to also allowing monitoring for apache, docker, and other applications installed.
+The main purpose of this network is to expose a load-balanced and monitored instance of DVWA, the D*mn Vulnerable Web Application.
+
+Load balancing ensures that the application will be highly available, in addition to restricting access to the network. The load balancer ensures that resources required to process incoming traffic will be shared by both vulnerable web servers. Access controls will ensure that only authorized users will be able to connect. Load Balancing ensures availability to the web-servers which is the availability aspect of security in regards to the CIA Triad.
+
+The main advantage of using a jump box is having one origination point for administrative tasks. This ultimately sets the JumpBox as a Secure Admin Workstation, in order to conduct administrative tasks required to access the JumpBox before accessing the other servers.
+
+- _TODO: What aspect of security do load balancers protect? What is the advantage of a jump box?_
+
+Integrating an ELK server allows users to easily monitor the vulnerable VMs for changes to the logs and system traffic.
+- _TODO: What does Filebeat watch for?_
+- Filebeat monitors the log files or locations specified, collects log events, and forwards them for indexing
+- _TODO: What does Metricbeat record?_
+- Metricbeat records system and application metrics. It allows for viewing cpu, memory, disk and network metrics, in addition to also allowing monitoring for apache, docker, and applications installed. It also records statisctical data from the operating system and from services running on the server (Metricbeat: Lightweight Shipper for Metrics)
+
+The configuration details of each machine may be found below.
+_Note: Use the [Markdown Table Generator](http://www.tablesgenerator.com/markdown_tables) to add/remove values from the table_.
+
+| Name     | Function | IP Address | Operating System |
+|----------|----------|------------|------------------|
+| Jump Box | Gateway  | 10.0.0.1   | Linux            |
+| DVWA-1   | WebServer| 10.0.0.5   | Linux            |
+| DVWA-2   | WebServer| 10.0.0.6   | Linux            |
+| ELK      | Monitor  | 10.1.0.4   | Linux            |
+
+### Access Policies
+
+The machines on the internal network are not exposed to the public Internet. 
+
+Only the JumpBox Provisioner machine can accept connections from the Internet. Access to this machine is only allowed from the following IP addresses: My Public IP
+- _TODO: Add whitelisted IP addresses_
 
 
-The configuration details of each machine may be found below. Note: Use the Markdown Table Generator to add/remove values from the table.
-Name	Function	IP Address	Operating System	
-JumpBox	Gateway	10.1.0.4	Linux	
-DVWA 1 (Web-1)	Web Server	10.1.0.5	Linux	
-DVWA 2 (Web-2)	Web Server	10.1.0.6	Linux	
-ELK-Server	Monitoring	10.2.0.4	Linux	
-Access Policies
-The machines on the internal network are not exposed to the public Internet.
-Only the JumpBox machine can accept connections from the Internet. Access to this machine is only allowed from the following IP addresses: My public IP
 Machines within the network can only be accessed by each other. The DVWA machines (Web-1 and Web-2) can send traffic to the ELK-Server
-A summary of the access policies in place can be found in the table below:
-Name	Public Access	Allowed IPs
-JumpBox	Yes	My Public IP
-ELK-Server	No	10.1.0.1-254
-Web-1	No	10.1.0.1-254
-Web-2	No	10.1.0.1.254
-In addition to the above, Azure has provisioned a load balancer in front of all machines except for the jump box. The load balancer's targets are organized into the following availability zones:
-Availability Zone 1: Web-1 + Web-2 Availability Zone 2: ELK
-ELK Server Configuration
-The ELK VM exposes an Elastic Stack instance. Docker is used to download and manage an ELK container.
-Ansible was used to automate configuration of the ELK machine. No configuration was performed manually, which is advantageous because this allows for easy replication and portability.
-The Ansible playbook implements the following tasks: Installing Docker, Installing pip3, Installing the Docker Python Module, Setting the system memory necessary for this machine to work properly, and Downloading and launching a Docker ELK container
-The Ansible playbook can be found in the YAML file elk.yml in this repo, and is also included here for convenience
-"---" (ignore quotes, I am ust including to circumvent the markup language turning this into a line)
-#- name: Config elk VM with Docker
- hosts: elkservers
- remote_user: puzzlegeek
- become: true
- tasks:
+- _TODO: Which machine did you allow to access your ELK VM? What was its IP address?_
 
-   #Use apt module
-  - name: Install docker.io
-    apt:
-      update_cache: yes
-      name: docker.io
-      state: present
-    
-    #Use apt module
-  - name: Install pip3
-    apt:
-      force_apt_get: yes
-      name: python3-pip
-      state: present
+A summary of the access policies in place can be found in the table below.
 
-    #Use pip module
-  - name: Install Docker python module
-    pip:
-      name: docker
-      state: present
+| Name     | Publicly Accessible | Allowed IP Addresses |
+|----------|---------------------|----------------------|
+| Jump Box |    Yes              |    My Public IP      |
+| DVWA-1   |    No               |    10.1.0.1-254      |
+| DVWA-2   |    No               |    10.1.0.1-254      |
+| ELK      |    No               |    10.1.0.1-254      |
 
-    #Use sysctl module
-  - name: Use more memory
-    sysctl:
-      name: vm.max_map_count
-      value: "262144"
-      state: present
-      reload: yes
+In addition to the above, Azure has provisioned a load balancer in front of all machines except for the JumpBox. The load balancer's targets are organized into the following availability zones: 
 
-    #Use docker_container module
-  - name: download and launch a docker elk container
-    docker_container:
-      name: elk
-      image: sebp/elk:761
-      state: started
-      restart_policy: always
-      published_ports:
-        - 5601:5601
-        - 9200:9200
-        - 5044:5044
-The following screenshot displays the result of running docker ps after successfully configuring the ELK instance.  
-Target Machines & Beats
+Availability Zone 1: Web-1 + Web-2  Availability Zone 2: ELK 
+
+### Elk Configuration
+
+The ELK VM exposes an Elastic Stack Instance. Docker is used to download and manage an ELK container.
+
+Ansible was used to automate configuration of the ELK machine. No configuration was performed manually, which is advantageous because this allows for easy replication and portability. Also, by automating the installation process we could deploy multiple servers easily and quickly without having to physically touch each server.
+
+The Ansible playbook implements the following tasks: 
+Installing Docker.io and pip3, Installing the Docker Python Module, Setting the system memory necessary for this machine to work properly, and Downloading and launching a Docker ELK container
+
+The Ansible playbook can be found in the YAML file elk.yml in this repo, and is also included here for reference-
+
+- _TODO: What is the main advantage of automating configuration with Ansible?_
+
+The playbook implements the following tasks:
+- _TODO: In 3-5 bullets, explain the steps of the ELK installation play. E.g., install Docker; download image; etc._
+- ...
+- ...
+
+The following screenshot displays the result of running `docker ps` after successfully configuring the ELK instance.
+
+![TODO: Update the path with the name of your screenshot of docker ps output](Images/docker_ps_output.png)
+
+### Target Machines & Beats
 This ELK server is configured to monitor the following machines: Web-1 and Web-2 (Both running DVWA)
-We have installed the following Beats on these machines: -Filebeat: Filebeat detects changes to the filesystem. Specifically, we use it to collect Apache logs. -Metricbeat: Metricbeat detects changes in system metrics, such as CPU usage. We use it to detect SSH login attempts, failed sudo escalations, and CPU/RAM statistics. -Packetbeat: Packetbeat collects packets that pass through the NIC, similar to Wireshark. We use it to generate a trace of all activity that takes place on the network, in case later forensic analysis should be warranted.
-The playbook below installs Metricbeat on the target hosts. The playbook for installing Filebeat is not included, but looks essentially identical — simply replace metricbeat with filebeat, and it will work as expected.
-Using the Playbook
-In order to use the playbook, you will need to have an Ansible control node already configured. Assuming you have such a control node provisioned, we will need to perform the following steps: -Copy the playbooks to the Ansible Control Node -Run each playbook on the appropriate targets
-SSH into the control node (in my case it was the Docker Anisble container on the JumpBox) and follow the steps below:
-The easiest way to copy the playbooks is to use Git:
-$ cd /etc/ansible
-$ mkdir files
-#Clone Repository + IaC Files
-$ git clone https://github.com/clayjoseph1994/ELK_Stack_Project.git
-#Move Playbooks and hosts file Into `/etc/ansible`
-$ cp ELK_Stack_Project/playbooks/* .
-$ cp ELK_Stack_Project/files/* ./files
-Next, you must create a hosts file to specify which VMs to run each playbook on. Run the commands below or copy the hosts file I have included in the files directory:
-$ cd /etc/ansible
-$ cat > hosts <<EOF
-[webservers]
-10.1.0.5
-10.2.0.6
+- _TODO: List the IP addresses of the machines you are monitoring_
 
-[elk]
-10.2.0.4
-EOF
-After this, the commands below run the playbook:
-$ cd /etc/ansible
-$ ansible-playbook elk.yml elk
-$ ansible-playbook filebeat-playbook.yml webservers
-$ ansible-playbook metricbeat-playbook.yml webservers
-To verify success, wait five minutes to give ELK time to start up.
-Then, navigate to the public IP of your ELK Server machine using port 5601. An example would be entering 0.0.0.0:5601 in your web browser. This should take you to the Kibana home screen.
-To ensure filebeat is working properly, from your ELK Server home page (Kibana) click on Add Log Data then choose System Logs. Then you simply have to scroll to the page bottom and click Check Data. If all is well, it will display "Data successfully received from this module"
-If this is not the case, you likely need to add a filebeat configuration file and add your ELK Server IP address in this config.
-From back on your Ansible container on the JumpBox:
+We have installed the following Beats on these machines:
+- _TODO: Specify which Beats you successfully installed_
+- Filebeat
+- Metricbeat
 
- 
+These Beats allow us to collect the following information from each machine:
+- _TODO: In 1-2 sentences, explain what kind of data each beat collects, and provide 1 example of what you expect to see. E.g., `Winlogbeat` collects Windows logs, which we use to track user logon events, etc._
+- Filebeat watches for log files, locations and collect log events.
+- Metricbeat records metrics and statistical data from the operating system and from servers runnings on the server
 
- 
+### Using the Playbook
+In order to use the playbook, you will need to have an Ansible control node already configured. Assuming you have such a control node provisioned: 
 
- 
-#curl https://gist.githubusercontent.com/slape/5cc350109583af6cbe577bbcc0710c93/raw/eca603b72586fbe148c11f9c87bf96a63cb25760/Filebeat > /etc/ansible/files/filebeat-config.yml
-The filebeat page lists the details of editing this correctly, but all I had to change was the line under Elasticsearch output. Because the private IP of my ELK Server is 10.2.0.4, I added this to the config file in this section like shown below:
-#-------------------------- Elasticsearch output ------------------------------- output.elasticsearch: #Boolean flag to enable or disable the output module. #enabled: true
-#Array of hosts to connect to. #Scheme and port can be left out and will be set to the default (http and 9200) #In case you specify and additional path, the scheme is required: http://localhost:9200/path #IPv6 addresses should always be defined as: https://[2001:db8::1]:9200 hosts: ["10.2.0.4:9200"] username: "elastic" password: "changeme" # TODO: Change this to the password you set
-Just make sure you also add the ":9200" after your ELK Server private IP address.
-To check if metricbeat is working properly, reload your ELK Server home page (Kibana) and click on Add Metric Data. Click on Docker Metrics, then scroll to the bottom and click on Check data. If the response is "Data successfulyy received from this module" everything is working properly, and you are done!
-If this is not the case, check your metricbeat config file. If it is missing, run the following to install it: curl https://gist.githubusercontent.com/slape/58541585cc1886d2e26cd8be557ce04c/raw/0ce2c7e744c54513616966affb5e9d96f5e12f73/metricbeat
-Make sure the parts of the file specified below match this (or whatever IPs you have for your machines, but this is what mine is configured for and it should work with the files I have provided) : #============================== Kibana =====================================
-#Starting with Beats version 6.0.0, the dashboards are loaded via the Kibana API. #This requires a Kibana endpoint configuration. setup.kibana: host: "10.2.0.4:5601"
-#Kibana Host #Scheme and port can be left out and will be set to the default (http and 5601) #In case you specify and additional path, the scheme is required: http://localhost:5601/path #IPv6 addresses should always be defined as: https://[2001:db8::1]:5601 #host: "localhost:5601"
-#Kibana Space ID #ID of the Kibana Space into which the dashboards should be loaded. By default, #the Default Space will be used. #space.id:
-#============================= Elastic Cloud ==================================
-#These settings simplify using Metricbeat with the Elastic Cloud (https://cloud.elastic.co/).
-#The cloud.id setting overwrites the output.elasticsearch.hosts and #setup.kibana.host options. #You can find the cloud.id in the Elastic Cloud web UI. #cloud.id:
-#The cloud.auth setting overwrites the output.elasticsearch.username and #output.elasticsearch.password settings. The format is <user>:<pass>. #cloud.auth:
-#================================ Outputs =====================================
-#Configure what output to use when sending the data collected by the beat.
-#-------------------------- Elasticsearch output ------------------------------ output.elasticsearch: #Array of hosts to connect to. hosts: ["10.2.0.4:9200"] username: "elastic" password: "changeme"
+SSH into the control node and follow the steps below:
+- Copy the filebeat-config.yml and metricbeat-config.yml file to /etc/ansible/files.
+- Update the configuuration files to include the Private IP of the ELK-Server to the ElasticSearch and Kibana Sections of the Configuration File
+- Run the playbook, and navigate to ELK-Server-PublicIP:5601/app/kibana to check that the installation worked as expected.
+
+_TODO: Answer the following questions to fill in the blanks:_
+- _Which file is the playbook? Where do you copy it?_
+- _Which file do you update to make Ansible run the playbook on a specific machine? How do I specify which machine to install the ELK server on versus which to install Filebeat on?_
+- The playbook files are: 
+ - elk-playbook.yml - used to install ELK server
+  - filebeat-playbook.yml - Used to install and configure Filebeat on ELK Server and DVWA servers
+  - metricbeat-playbook.yml - Used to install and Configure Metricbeat on ELK Server and DVWA servers 
+
+- Where do you copy it :  /etc/ansible 
+- Which file do you update to make Ansible run the playbook on a specific machine? :  /etc/ansible/hosts.cfg
+- How do I specify which machine to install the ELK server on versus which to install Filebeat on?:  In /etc/ansible/hosts user writes instruction where to install the ELK servers or Filebeat
+- _Which URL do you navigate to in order to check that the ELK server is running?
+http://23.100.44.95:5601/app/kibana#/home/tutorial/systemLogs
+
+_As a **Bonus**, provide the specific commands the user will need to run to download the playbook, update the files, etc._
+- Commands needed to run the Ansible Configuration for the Elk-Server are:
+- 1. ssh RedAdmin@JumpBox (Private IP)
+- 2. sudo docker container list -a  (to locate the ansible container)
+- 3. sudo docker start (e.g.silly_bouman)
+- 4. sudo docker attach (e.g.silly_bouman)
+- 5. cd /etc/ansible/
+- 6. ansible-playbook elk-playbook.yml (Installs and Configure Beats)
+- 7. cd /etc/ansible/
+- 8. ansible-playbook beats-playbook.yml (Installs and Vonfigure Beats)
+- 9. Open a new browser on personal workstation, navigate to (ELK-Server-Public:5601/app/kibana) - This will bring up Kibana Web Portal 
+
 Congratulations! You have an ELK Stack Server monitoring system logs on two web serve
 
  
