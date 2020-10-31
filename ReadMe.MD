@@ -27,7 +27,7 @@ Load balancing ensures that the application will be highly available, in additio
 
 The main advantage of using a jump box is having one origination point for administrative tasks. This ultimately sets the JumpBox as a Secure Admin Workstation, in order to conduct administrative tasks required to access the JumpBox before accessing the other servers.
 
-- _TODO: What aspect of security do load balancers protect? What is the advantage of a jump box?_
+- What aspect of security do load balancers protect? What is the advantage of a jump box?_
 
 Integrating an ELK server allows users to easily monitor the vulnerable VMs for changes to the logs and system traffic.
 - _TODO: What does Filebeat watch for?_
@@ -50,11 +50,11 @@ _Note: Use the [Markdown Table Generator](http://www.tablesgenerator.com/markdow
 The machines on the internal network are not exposed to the public Internet. 
 
 Only the JumpBox Provisioner machine can accept connections from the Internet. Access to this machine is only allowed from the following IP addresses: My Public IP
-- _TODO: Add whitelisted IP addresses_
+
 
 
 Machines within the network can only be accessed by each other. The DVWA machines (Web-1 and Web-2) can send traffic to the ELK-Server
-- _TODO: Which machine did you allow to access your ELK VM? What was its IP address?_
+
 
 A summary of the access policies in place can be found in the table below.
 
@@ -80,16 +80,13 @@ Installing Docker.io and pip3, Installing the Docker Python Module, Setting the 
 
 The Ansible playbook can be found in the YAML file elk.yml in this repo, and is also included here for reference-
 
-- _TODO: What is the main advantage of automating configuration with Ansible?_
+
 
 The playbook implements the following tasks:
-- _TODO: In 3-5 bullets, explain the steps of the ELK installation play. E.g., install Docker; download image; etc._
-- ...
-- ...
+
 
 The following screenshot displays the result of running `docker ps` after successfully configuring the ELK instance.
-
-![TODO: Update the path with the name of your screenshot of docker ps output](Images/docker_ps_output.png)
+![Docker](https://github.com/japkaur17/ELK-Stack-project/blob/main/images/server.PNG) 
 
 ### Target Machines & Beats
 This ELK server is configured to monitor the following machines: Web-1 and Web-2 (Both running DVWA)
