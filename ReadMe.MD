@@ -82,7 +82,7 @@ The Ansible playbook implements the following tasks:
 Installing Docker.io, Installing pip3, Installing the Docker Python Module, Setting the system memory necessary for this machine to work properly, and Downloading and launching a Docker ELK container
 
 The Ansible playbook can be found in the YAML file elk.yml in this repo, and is also included here for reference.
-
+![pentestyml](https://github.com/japkaur17/ELK-Stack-project/blob/main/images/pentest%20yml.PNG)
 
 
 The following screenshot displays the result of running `docker ps` after successfully configuring the ELK instance.
