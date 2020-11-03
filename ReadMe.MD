@@ -118,10 +118,10 @@ SSH into the control node and follow the steps below:
 - Where do you copy it :  /etc/ansible 
 - Which file do you update to make Ansible run the playbook on a specific machine? :  /etc/ansible/hosts.cfg
 - How do I specify which machine to install the ELK server on versus which to install Filebeat on?:  In /etc/ansible/hosts user writes instruction where to install the ELK servers or Filebeat
-- _Which URL do you navigate to in order to check that the ELK server is running?
+- Which URL do you navigate to in order to check that the ELK server is running?
 http://23.100.44.95:5601/app/kibana#/home/tutorial/systemLogs
 
-_As a **Bonus**, provide the specific commands the user will need to run to download the playbook, update the files, etc._
+_The specific commands the user will need to run to download the playbook, update the files, etc._
 - Commands needed to run the Ansible Configuration for the Elk-Server are:
 - 1. ssh RedAdmin@JumpBox (Private IP)
 - 2. sudo docker container list -a  (to locate the ansible container)
