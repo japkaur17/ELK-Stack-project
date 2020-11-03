@@ -1,5 +1,11 @@
 # ELK-Stack-project
+## The ELK Stack
+ELK is an acronym. Each letter stands for an open-source techonology. These tools are collectively known as ELK Stack.
+![ELK Stack](https://github.com/japkaur17/ELK-Stack-project/blob/main/images/ELK%20Overview.PNG) 
+
 ## Automated ELK Stack Deployment
+
+
 
 The files in this repository were used to configure the network depicted below: 
 
