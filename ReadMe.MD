@@ -3,7 +3,7 @@
 
 
 ELK is an acronym. Each letter stands for an open-source techonology. These tools are collectively known as ELK Stack.
-The ELK Stack project is about placing an ELK monitoring stack within your virtual network to:
+The ELK Stack project briefs on placing an ELK monitoring stack within your virtual network to:
  - Easily collect logs from multiple machines into single database
  - Quickly execute complex searches, such as: Find the 12 internal IP addresses that sent the most HTTP traffic to my gateway between 4 a.m. and 8 a.m. in April 2020
  - Build graphs, charts and other virtualizations from network data
