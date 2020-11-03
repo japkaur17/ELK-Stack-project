@@ -133,7 +133,7 @@ _As a **Bonus**, provide the specific commands the user will need to run to down
 - 5. cd /etc/ansible/
 - 6. ansible-playbook elk-playbook.yml (Installs and Configure Beats)
 - 7. cd /etc/ansible/
-- 8. ansible-playbook beats-playbook.yml (Installs and Vonfigure Beats)
+- 8. ansible-playbook beats-playbook.yml (Installs and Configure Beats)
 - 9. Open a new browser on personal workstation, navigate to (ELK-Server-Public:5601/app/kibana) - This will bring up Kibana Web Portal 
 ![Kibana](https://github.com/japkaur17/ELK-Stack-project/blob/main/images/kibana.PNG) 
 ![Kibanalogs](https://github.com/japkaur17/ELK-Stack-project/blob/main/images/logs.PNG)
