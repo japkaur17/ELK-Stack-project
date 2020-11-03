@@ -6,9 +6,9 @@ The files in this repository were used to configure the network depicted below:
 ![Cloud Architecture](https://github.com/japkaur17/ELK-Stack-project/blob/main/images/ELK%20NW.PNG) 
 
 [NOTE: the network diagram has differing IP addresses from the ones Azure assigned me by default]
+
 These files have been tested and used to generate a live ELK deployment on Azure. They can be used to either recreate the entire deployment pictured above. Alternatively, select portions of the playbook (.yml) file(s) may be used to install only certain pieces of it, such as Filebeat.
 
-  - Enter the playbook file._
 
 This document contains the following details:
 - Description of the Topology
@@ -23,9 +23,9 @@ This document contains the following details:
 
 The main purpose of this network is to expose a load-balanced and monitored instance of DVWA, the D*mn Vulnerable Web Application.
 
-Load balancing ensures that the application will be highly available, in addition to restricting access to the network. The load balancer ensures that resources required to process incoming traffic will be shared by both vulnerable web servers. Access controls will ensure that only authorized users will be able to connect. Load Balancing ensures availability to the web-servers which is the availability aspect of security in regards to the CIA Triad.
+Load balancing ensures that the application will be highly available, in addition to restricting inbound access to the network. The load balancer ensures that resources required to process incoming traffic will be shared by both vulnerable web servers. Access controls will ensure that only authorized users will be able to connect. Load Balancing ensures availability to the web-servers which is the availability aspect of security in regards to the CIA Triad.
 
-The main advantage of using a jump box is having one origination point for administrative tasks. This ultimately sets the JumpBox as a Secure Admin Workstation, in order to conduct administrative tasks required to access the JumpBox before accessing the other servers.
+
 
 - What aspect of security do load balancers protect? What is the advantage of a jump box?_
 
@@ -34,6 +34,8 @@ Integrating an ELK server allows users to easily monitor the vulnerable VMs for 
 - Filebeat monitors the log files or locations specified, collects log events, and forwards them for indexing
 - What does Metricbeat record?
 - Metricbeat records system and application metrics. It allows for viewing cpu, memory, disk and network metrics, in addition to also allowing monitoring for apache, docker, and applications installed. It also records statisctical data from the operating system and from services running on the server (Metricbeat: Lightweight Shipper for Metrics)
+
+The main advantage of using a jump box is having one origination point for administrative tasks. This ultimately sets the JumpBox as a Secure Admin Workstation, in order to conduct administrative tasks required to access the JumpBox before accessing the other servers.
 
 The configuration details of each machine may be found below.
 _Note: Use the [Markdown Table Generator](http://www.tablesgenerator.com/markdown_tables) to add/remove values from the table_.
@@ -73,16 +75,14 @@ Availability Zone 1: Web-1 + Web-2  Availability Zone 2: ELK
 
 The ELK VM exposes an Elastic Stack Instance. Docker is used to download and manage an ELK container.
 
-Ansible was used to automate configuration of the ELK machine. No configuration was performed manually, which is advantageous because this allows for easy replication and portability. Also, by automating the installation process we could deploy multiple servers easily and quickly without having to physically touch each server.
+Ansible was used to automate configuration of the ELK machine. No configuration was performed manually, which is advantageous because this allows for easy replication and portability. 
+Also, by automating the installation process we could deploy multiple servers easily and quickly without having to physically touch each server.
 
 The Ansible playbook implements the following tasks: 
-Installing Docker.io and pip3, Installing the Docker Python Module, Setting the system memory necessary for this machine to work properly, and Downloading and launching a Docker ELK container
+Installing Docker.io, Installing pip3, Installing the Docker Python Module, Setting the system memory necessary for this machine to work properly, and Downloading and launching a Docker ELK container
 
-The Ansible playbook can be found in the YAML file elk.yml in this repo, and is also included here for reference-
+The Ansible playbook can be found in the YAML file elk.yml in this repo, and is also included here for reference.
 
-
-
-The playbook implements the following tasks:
 
 
 The following screenshot displays the result of running `docker ps` after successfully configuring the ELK instance.
