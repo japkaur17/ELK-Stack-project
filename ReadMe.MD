@@ -84,7 +84,7 @@ In addition to the above, Azure has provisioned a load balancer in front of all 
 
 Availability Zone 1: Web-1 + Web-2  Availability Zone 2: ELK 
 
-### Elk Configuration
+### ELK Configuration
 
 The ELK VM exposes an Elastic Stack Instance. Docker is used to download and manage an ELK container.
 
